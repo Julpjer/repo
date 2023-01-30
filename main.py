@@ -9,7 +9,6 @@ st.text_input("Enter your Name: ", key="name")
 data = pd.read_csv("https://raw.githubusercontent.com/Julpjer/repo/master/Fish.csv")
 #load label encoder
 encoder = LabelEncoder()
-encoder.classes_ = np.load('classes.npy',allow_pickle=True)
 
 # load model
 best_xgboost_model = xgb.XGBRegressor()
