@@ -41,14 +41,14 @@ def models_score(model_name, train_data, y_train, val_data, y_val):
         score_MSE, score_MAE, score_r2score = evauation_model(pred, y_val)
         return round(score_MSE, 2), round(score_MAE, 2), round(score_r2score, 2)
 
-data = pd.read_csv("Fish.csv")
-data_cleaned = data.drop("Weight", axis=1)
-y = data['Weight']
+data = pd.read_csv(r'C:\Users\jbroek\Desktop\ACC22.csv', delimiter=",")
+data_cleaned = data.drop("sigma", axis=1)
+y = data['sigma']
 #%%
-x_train, x_test, y_train, y_test = train_test_split(data_cleaned,y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(data_cleaned,y, test_size=0.1, random_state=42)
 label_encoder = LabelEncoder()
-x_train['Species'] = label_encoder.fit_transform(x_train['Species'].values)
-x_test['Species'] = label_encoder.transform(x_test['Species'].values)
+x_train['ps'] = label_encoder.fit_transform(x_train['ps'].values)
+x_test['ps'] = label_encoder.transform(x_test['ps'].values)
 model_list = ["Decision_Tree","Random_Forest","XGboost_Regressor"]
 #%%
 result_scores = []
