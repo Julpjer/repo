@@ -16,11 +16,6 @@ best_xgboost_model = xgb.XGBRegressor()
 best_xgboost_model.load_model("best_model.json")
 
 st.subheader("Please select relevant features of your fish!")
-left_column, right_column = st.columns(2)
-with left_column:
-    inp_ps = st.radio(
-        'Name of the fish:',
-        np.unique(data['ps']))
 
 
 input_Length1 = st.slider('Vertical length(cm)', 0.0, max(data["gewicht"]), 1.0)
@@ -30,9 +25,8 @@ input_Length3 = st.slider('Cross length(cm)', 0.0, max(data["rijen"]), 1.0)
 
 
 if st.button('Make Prediction'):
-    input_ps = encoder.transform(np.expand_dims(inp_ps, -1))
     inputs = np.expand_dims(
-        [input_Length1, input_Length2, input_Length3, int(input_ps)], 0)
+        [input_Length1, input_Length2, input_Length3], 0)
     prediction = best_xgboost_model.predict(inputs)
     print("final pred", np.squeeze(prediction, -1))
     st.write(f"Your fish weight is: {np.squeeze(prediction, -1):.2f}g")
