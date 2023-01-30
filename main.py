@@ -33,7 +33,7 @@ input_Length3 = st.slider('Cross length(cm)', 0.0, max(data["rijen"]), 1.0)
 
 
 if st.button('Make Prediction'):
-    input_species = encoder.transform(np.expand_dims(inp_species, -1))
+    input_ps = encoder.transform(np.expand_dims(inp_ps, -1))
     inputs = np.expand_dims(
         [input_Length1, input_Length2, input_Length3, int(input_ps)], 0)
     prediction = best_xgboost_model.predict(inputs)
